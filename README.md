@@ -6,6 +6,7 @@
 ### 진행상황
 - 2025-02-19 : USECASE, ERD 및 전체 프로젝트 구상
 - 2025-02-20 : Spring boot 백엔드 API 1차 테스트 완료
+- 2025-02-21 : React 프론트엔드 1차 구성 완료
 
 ## 주요 기능
 - TODO 조회 / 추가 / 수정 / 삭제
@@ -22,6 +23,7 @@
 - MySQL 스키마 생성 ( todoapp )
 - application.properties 파일에서 Data Base(JPA + MySQL settiing) 주석 부분 수정 후 실행 ( 사용자명, 비밀번호 등 )
 - **백엔드 실행** : cd todoapp; ./gradlew bootRun;
+- **프론트엔드 실행** : cd frontend; npm start;
 
 ## API 명세
 - TODO 전체 목록 조회 : (GET) /api/todos
@@ -34,18 +36,14 @@
 **(POST) http://localhost:8080/api/todos**
 ```json
 {
-    "name":"yourName",
     "title":"MyTODO",
-    "description":"TODO description"
 }
 ```
 **(PUT) http://localhost:8080/api/todos/{id}**
 ```json
 {
     "id":{id},
-    "name":"ChangedName",
     "title":"Update TODO",
-    "description":"TODO description",
     "status":true,
     "mostImportant":true
 }

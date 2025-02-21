@@ -1,12 +1,15 @@
 package com.example.todoapp.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
 import com.example.todoapp.entity.Todo;
 import com.example.todoapp.repository.TodoRepository;
+
 import lombok.RequiredArgsConstructor;
-import java.util.List;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,13 +30,9 @@ public class TodoService {
     // Todo 추가
     public Todo addTodo(Todo todo) {
         Todo newTodo = Todo.builder()
-                .name(todo.getName())
                 .title(todo.getTitle())
-                .description(todo.getDescription())
                 .status(false)
-                .mostImportant(false)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .mostImportant(todo.getMostImportant())
                 .build();
         return todoRepository.save(newTodo);
     }
@@ -46,13 +45,9 @@ public class TodoService {
         }
         Todo requestTodo = Todo.builder()
                 .id(todo.getId())
-                .name(todo.getName())
                 .title(todo.getTitle())
-                .description(todo.getDescription())
                 .status(todo.getStatus())
                 .mostImportant(todo.getMostImportant())
-                .createdAt(updateTodo.getCreatedAt())
-                .updatedAt(LocalDateTime.now())
                 .build();
         return todoRepository.save(requestTodo);
     }

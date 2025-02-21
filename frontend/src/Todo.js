@@ -54,7 +54,9 @@ const Todo = (props) => {
     };
 
     const deleteEventHandler = () => {
-        deleteItem(item);
+        if (window.confirm("❗ 이 작업은 취소할 수 없습니다. 정말 삭제하시겠습니까?")){
+            deleteItem(item);
+        }
     };
 
     return (

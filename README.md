@@ -12,7 +12,6 @@
 - TODO 조회 / 추가 / 수정 / 삭제
 - TODO 검색 기능 ( 키워드 검색 )
 - TODO 우선 순위 설정 ( 중요도 필터링 )
-- 생성 / 수정 시간 자동 기록
 
 ## 기술 스택
 - Backend : Spring Boot, JPA, MySQL

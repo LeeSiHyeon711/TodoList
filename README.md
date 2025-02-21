@@ -36,6 +36,7 @@
 ```json
 {
     "title":"MyTODO",
+    "mostImportant":false
 }
 ```
 **(PUT) http://localhost:8080/api/todos/{id}**

@@ -24,7 +24,8 @@ const AddTodo = (props) => {
 
     // + 버튼 입력시 호출 함수
     const onButtonClick = () => {
-        console.log("Submitting Item: ", item);
+        // console.log("Submitting Item: ", item);
+        if (item.title.trim() === "") return alert("✏️추가할 TODO를 입력해주세요!");
         addItem(item);  // App.js의 addItem 함수 호출
         setItem({ title: "", mostImportant: false }) // 입력 필드 초기화
     };
@@ -52,7 +53,7 @@ const AddTodo = (props) => {
             </Grid>
 
             <Grid xs={10} md={10} item style={{ paddingRight: 10 }}>
-                <TextField placeholder="TODO 등록하기" 
+                <TextField placeholder="등록할 TODO를 입력해주세요" 
                 fullWidth
                 onChange={onInputChange}
                 onKeyPress={enterKeyEventHandler}
@@ -63,7 +64,7 @@ const AddTodo = (props) => {
             <Grid xs={1} md={1} item >
                 <Button fullWidth style={{ height: '100%' }} color="primary" 
                 variant="outlined" onClick={onButtonClick}>
-                    +
+                    추가
                 </Button>
             </Grid>
         </Grid>

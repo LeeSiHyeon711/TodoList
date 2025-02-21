@@ -22,3 +22,9 @@
 .searchbar {
   float: right;
 }
+
+span {
+  color: gray;
+  font-size: 12px;
+  margin-right: 10px;
+}

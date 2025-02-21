@@ -10,11 +10,23 @@ const Todo = (props) => {
     const deleteItem = props.deleteItem;
     const [readOnly, setReadOnly] = useState(true);
     const editItem = props.editItem;
+    const setItems = props.setItems;
+
+    const getCurrentTime = () => {
+        const now = new Date();
+        return now.toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" }) +
+               " " +
+               now.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false });
+    };
 
     const onImportantButtonClick = () => {
         const updatedItem = { ...item, mostImportant: !item.mostImportant };
         setItem(updatedItem);
         editItem(updatedItem);
+        setItems((prevItems) => {
+            const updatedItems = prevItems.map((i) => (i.id === updatedItem.id ? updatedItem : i));
+            return [...updatedItems].sort((a, b) => b.mostImportant - a.mostImportant);
+        });
     };
 
     const checkboxEventHandler = (e) => {
@@ -29,8 +41,11 @@ const Todo = (props) => {
 
     const turnOnReadOnly = (e) => {
         if (e.key === "Enter" && !readOnly) {
+            if (e.target.value.trim() === "") return alert("✏️수정할 내용을 입력해주세요!");
+            const updatedItem = { ...item, updatedAt: getCurrentTime() };
+            setItem(updatedItem);
+            editItem(updatedItem);
             setReadOnly(true);
-            editItem(item);
         }
     };
 
@@ -63,7 +78,8 @@ const Todo = (props) => {
                 />
             </ListItemText>
             <ListItemSecondaryAction>
-                <IconButton aria-label="Important Todo" onClick={onImportantButtonClick}>
+            <span style={{ fontSize: "12px", color: "#888", marginRight: "10px" }}>{item.updatedAt}</span>
+            <IconButton aria-label="Important Todo" onClick={onImportantButtonClick}>
                     {item.mostImportant ? (
                         <StarIcon className="star-icon" style={{ color: "gold" }} />
                     ) : (

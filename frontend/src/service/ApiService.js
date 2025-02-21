@@ -9,7 +9,6 @@ export function call(api, method, request) {
         method: method,
     };
     if (request) {
-        // GET method
         options.body = JSON.stringify(request);
     }
     return fetch(options.url, options).then((response) => {

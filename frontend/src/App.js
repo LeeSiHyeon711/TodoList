@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     call("/api/todos", "GET", null)
     .then((response) => {
-      setItems(response);
+      setItems(response.sort((a, b) => b.mostImportant - a.mostImportant));
     });
   }, []);
 
@@ -46,19 +46,28 @@ function App() {
     });
   };
 
-  const filteredItems = getSearchResult();
+  const filteredItems = getSearchResult()
 
-  let todoItems = filteredItems.length > 0 && (
+  let todoItems = filteredItems.length > 0 ? (
     <Paper style={{ margin: 16}}>
       <List>
         {filteredItems.map((item) => (
-          <Todo item={item}
-          key={item.id}
-          editItem={editItem}
-          deleteItem={deleteItem}/>
+          <Todo
+            item={item}
+            key={item.id}
+            editItem={editItem}
+            deleteItem={deleteItem}
+            setItems={setItems}
+          />
         ))}
       </List>
     </Paper>
+  ) : (
+    <div style={{ textAlign: "center", marginTop: "25px", color: "#888", fontSize: "18px" }}>
+      🚀 아직 등록된 일정이 없어요. 일정을 추가해주세요!<br />
+      ⭐ 우선순위 일정이라면 <strong>별 아이콘</strong>을 클릭하고 등록해보세요!<br />
+      <strong>꿈을 향해 달려가는 당신을 응원합니다. 💪</strong>
+    </div>
   );
   return (
         <div className="App">
@@ -70,8 +79,9 @@ function App() {
             placeholder='검색할 TODO를 입력하세요'
           />
             <div className='Header'>
-              <h3>오늘은 📝</h3>
-              <h1>{new Date().toDateString()}</h1>
+              <h3>📝 오늘은</h3>
+              {/* <h1>{new Date().toDateString()}</h1> */}
+              <h1>{new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric", weekday: "long" })}</h1>
             </div>
             <AddTodo addItem={addItem}/>
             <Grid className='TodoList'>

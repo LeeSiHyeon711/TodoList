@@ -1,5 +1,9 @@
 package com.example.todoapp.entity;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +31,14 @@ public class Todo {
 
     @Column(nullable = false)
     private Boolean status = false; // Todo 상태(완료, 미완료)
+
+    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime createdAt; // 작성일
+
+    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime updatedAt; // 수정일
 
     @Column(nullable = false)
     private Boolean mostImportant; // 중요 여부

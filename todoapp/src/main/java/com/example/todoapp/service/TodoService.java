@@ -33,6 +33,8 @@ public class TodoService {
                 .title(todo.getTitle())
                 .status(false)
                 .mostImportant(todo.getMostImportant())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
         return todoRepository.save(newTodo);
     }
@@ -48,6 +50,8 @@ public class TodoService {
                 .title(todo.getTitle())
                 .status(todo.getStatus())
                 .mostImportant(todo.getMostImportant())
+                .createdAt(updateTodo.getCreatedAt())
+                .updatedAt(LocalDateTime.now())
                 .build();
         return todoRepository.save(requestTodo);
     }
